@@ -13,12 +13,10 @@ const simulationSchema = {
     cityName: { type: Type.STRING, description: 'یک نام خلاقانه و مناسب برای شهر' },
     cityOverview: { type: Type.STRING, description: 'توضیح کلی درباره شهر، معماری و ظاهر آن' },
     lifestyle: { type: Type.STRING, description: 'شرح سبک زندگی، فرهنگ و فعالیت‌های روزمره ساکنان' },
-    government: { type: Type.STRING, description: 'توضیح سیستم حکومتی و ساختار سیاسی شهر' },
-    military: { type: Type.STRING, description: 'شرح سیستم نظامی، دفاعی و امنیتی' },
     technology: { type: Type.STRING, description: 'توضیح سطح فناوری، نوآوری‌ها و ابزارهای مورد استفاده' },
     cityImagePrompt: { type: Type.STRING, description: 'یک پرامپت انگلیسی دقیق و هنری برای هوش مصنوعی متن به عکس جهت تولید تصویر شهر. مثال: "futuristic martian city, red dust, glass domes, cyberpunk, hyperrealistic, octane render, 8k"' },
   },
-  required: ['cityName', 'cityOverview', 'lifestyle', 'government', 'military', 'technology', 'cityImagePrompt'],
+  required: ['cityName', 'cityOverview', 'lifestyle', 'technology', 'cityImagePrompt'],
 };
 
 export async function generateSimulation(planetDescription: string): Promise<SimulationData> {
@@ -124,9 +122,6 @@ export function startChatSession(planetName: string, cityName: string, chatTarge
             break;
         case 'دانشمند':
             systemInstruction = `شما یک دانشمند محقق در مرکز علوم شهر "${cityName}" در سیاره "${planetName}" هستید. تمرکز شما بر روی محیط زیست و ویژگی‌های منحصربه‌فرد این سیاره است. با دقت علمی و کنجکاوی به سوالات پاسخ دهید. ${conversationalPrompt}`;
-            break;
-        case 'دولتمرد':
-            systemInstruction = `شما یک مقام دولتی و سیاستمدار در شهر "${cityName}" در سیاره "${planetName}" هستید. شما با دیدگاهی رسمی و دیپلماتیک در مورد ساختار حکومت، قوانین و روابط اجتماعی صحبت می‌کنید. ${conversationalPrompt}`;
             break;
         case 'فضانورد':
             systemInstruction = `شما یک فضانورد باتجربه و دانشمند هستید. شما به بسیاری از اجرام منظومه شمسی سفر کرده‌اید و دانش عمیقی در مورد سیارات فراخورشیدی دارید. پاسخ‌های شما باید بر اساس دانش علمی فعلی باشد، اما با لحنی انسانی، جذاب و گاهی با چاشنی خاطرات شخصی از "سفرهایتان" ارائه شود. از اصطلاحات پیچیده علمی پرهیز کنید مگر اینکه آن را به سادگی توضیح دهید. هدف شما الهام بخشیدن به کنجکاوی در مورد فضا است. ${conversationalPrompt}`;

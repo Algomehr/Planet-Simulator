@@ -100,8 +100,6 @@ const App: React.FC = () => {
         cityName: "کهکشان راه شیری",
         cityOverview: "کاوش در فضا",
         lifestyle: "",
-        government: "",
-        military: "",
         technology: "",
         // Fix: Added missing cityImagePrompt property to satisfy the SimulationData type.
         cityImagePrompt: ""

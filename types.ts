@@ -9,8 +9,6 @@ export interface SimulationData {
   cityName: string;
   cityOverview: string;
   lifestyle: string;
-  government: string;
-  military: string;
   technology: string;
   cityImagePrompt: string;
 }
@@ -24,7 +22,7 @@ export interface ChatMessage {
 export type View = 'main' | 'simulation' | 'chat';
 export type MainViewTab = 'explore' | 'create' | 'life' | 'astronaut';
 
-export type ChatRole = 'راهنمای تور' | 'مهندس' | 'شهروند' | 'پزشک' | 'دانشمند' | 'دولتمرد' | 'فضانورد';
+export type ChatRole = 'راهنمای تور' | 'مهندس' | 'شهروند' | 'پزشک' | 'دانشمند' | 'فضانورد';
 
 export interface ChatTarget {
   role: ChatRole;
