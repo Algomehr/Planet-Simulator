@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import type { Planet, SimulationData, View, ChatRole, ChatTarget, CustomPlanetParams, MainViewTab, LifeAnalysisData } from './types';
+import type { Planet, SimulationData, View, ChatRole, ChatTarget, CustomPlanetParams, MainViewTab, LifeAnalysisData, Scientist } from './types';
 import MainView from './components/MainView';
 import SimulationView from './components/SimulationView';
 import ChatView from './components/ChatView';
 import LoadingSpinner from './components/LoadingSpinner';
 import { generateSimulation, generateLifeAnalysis } from './services/geminiService';
 import LifeAnalysisResultModal from './components/LifeAnalysisResultModal';
+import { SCIENTISTS } from './constants';
 
 const App: React.FC = () => {
   const [view, setView] = useState<View>('main');
@@ -89,7 +90,6 @@ const App: React.FC = () => {
   };
 
   const handleStartAstronautChat = () => {
-    // Create dummy data so ChatView can function without a full simulation
     const astronautPlanet: Planet = {
         name: "فضا",
         nameEn: "Space",
@@ -101,7 +101,6 @@ const App: React.FC = () => {
         cityOverview: "کاوش در فضا",
         lifestyle: "",
         technology: "",
-        // Fix: Added missing cityImagePrompt property to satisfy the SimulationData type.
         cityImagePrompt: ""
     };
     setSelectedPlanet(astronautPlanet);
@@ -110,10 +109,28 @@ const App: React.FC = () => {
     setView('chat');
   };
 
+  const handleStartScientistChat = (scientist: Scientist) => {
+    const scientistPlanet: Planet = {
+        name: "تاریخ علم",
+        nameEn: "History of Science",
+        description: "گفتگو با بزرگترین اذهان تاریخ",
+        image: ""
+    };
+    const scientistSimData: SimulationData = {
+        cityName: "عرصه دانش",
+        cityOverview: "کاوش در ایده‌ها",
+        lifestyle: "",
+        technology: "",
+        cityImagePrompt: ""
+    };
+    setSelectedPlanet(scientistPlanet);
+    setSimulationData(scientistSimData);
+    setChatTarget({ role: scientist.name, persona: scientist.description });
+    setView('chat');
+  };
+
   const handleBackToMain = () => {
     setView('main');
-    // Keep the active tab as it was, or reset it
-    // setActiveTab('explore'); 
     setSelectedPlanet(null);
     setSimulationData(null);
     setError(null);
@@ -126,11 +143,10 @@ const App: React.FC = () => {
   };
   
   const getBackAction = () => {
-    // If the chat is with an astronaut, go back to the main menu.
-    if (chatTarget?.role === 'فضانورد') {
+    const scientistRoles = SCIENTISTS.map(s => s.name);
+    if (chatTarget?.role === 'فضانورد' || scientistRoles.includes(chatTarget?.role as any)) {
         return handleBackToMain;
     }
-    // Otherwise, go back to the simulation view.
     return handleBackToSimulation;
   }
 
@@ -164,6 +180,7 @@ const App: React.FC = () => {
                   onSelectPlanet={handleSelectPlanet}
                   onGenerate={handleGenerateCustomPlanet}
                   onAnalyzeLife={handleAnalyzeLife}
+                  onStartScientistChat={handleStartScientistChat}
                   onStartAstronautChat={handleStartAstronautChat}
                 />;
     }

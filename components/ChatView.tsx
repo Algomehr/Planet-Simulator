@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import type { ChatMessage, Planet, SimulationData, ChatTarget } from '../types';
 import { startChatSession, continueChat, createImageGenerationPrompt } from '../services/geminiService';
 import MarkdownRenderer from './MarkdownRenderer';
+import { SCIENTISTS } from '../constants';
 
 interface ChatViewProps {
   planet: Planet;
@@ -15,12 +16,20 @@ const ChatView: React.FC<ChatViewProps> = ({ planet, simulationData, chatTarget,
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  
+  const scientistRoles = SCIENTISTS.map(s => s.name);
 
   useEffect(() => {
     startChatSession(planet.name, simulationData.cityName, chatTarget);
-    const initialMessage = chatTarget.role === 'فضانورد'
-      ? `سلام! من یک فضانورد هستم. خوشحالم که اینجا هستی. در مورد کدام بخش از این جهان بی‌کران کنجکاوی؟`
-      : `سلام! من ${chatTarget.role} شما در شهر ${simulationData.cityName} هستم. چه سوالی دارید؟`;
+    
+    let initialMessage = '';
+    if (chatTarget.role === 'فضانورد') {
+        initialMessage = 'سلام! من یک فضانورد هستم. خوشحالم که اینجا هستی. در مورد کدام بخش از این جهان بی‌کران کنجکاوی؟';
+    } else if (scientistRoles.includes(chatTarget.role as any)) {
+        initialMessage = `سلام، من ${chatTarget.role} هستم. خوشحالم که فرصتی برای گفتگو فراهم شده. چه چیزی ذهن شما را به خود مشغول کرده است؟`;
+    } else {
+        initialMessage = `سلام! من ${chatTarget.role} شما در شهر ${simulationData.cityName} هستم. چه سوالی دارید؟`;
+    }
 
     setMessages([
       { role: 'model', text: initialMessage }
@@ -77,6 +86,8 @@ const ChatView: React.FC<ChatViewProps> = ({ planet, simulationData, chatTarget,
     }
   };
 
+  const isSpecialChat = chatTarget.role === 'فضانورد' || scientistRoles.includes(chatTarget.role as any);
+
   return (
     <div className="flex flex-col h-screen bg-gray-900 text-white p-4">
       <div className="flex items-center justify-between pb-4 border-b border-gray-700">
@@ -85,7 +96,7 @@ const ChatView: React.FC<ChatViewProps> = ({ planet, simulationData, chatTarget,
         </button>
         <div className="text-center">
           <h2 className="text-xl font-bold text-cyan-400">گفتگو با {chatTarget.role}</h2>
-          {chatTarget.role !== 'فضانورد' && (
+          {!isSpecialChat && (
             <p className="text-sm text-gray-400">در شهر {simulationData.cityName}</p>
           )}
         </div>

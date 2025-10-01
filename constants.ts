@@ -1,4 +1,4 @@
-import type { Planet } from './types';
+import type { Planet, Scientist } from './types';
 
 export const PLANETS: Planet[] = [
   {
@@ -48,5 +48,68 @@ export const PLANETS: Planet[] = [
     nameEn: 'TRAPPIST-1e',
     image: 'https://exoplanets.nasa.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbU5tIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--63259b3ce57374b6e51bf494025d2c20845a9018/trappist-1e-jpeg-800.jpg',
     description: 'یک سیاره فراخورشیدی به اندازه زمین در منظومه‌ای با هفت سیاره سنگی.'
+  }
+];
+
+export const SCIENTISTS: Scientist[] = [
+  {
+    name: 'آلبرت اینشتین',
+    description: 'فیزیکدان نظری، خالق نظریه نسبیت',
+    lifespan: '۱۸۷۹ - ۱۹۵۵'
+  },
+  {
+    name: 'ماری کوری',
+    description: 'فیزیکدان و شیمیدان، پیشگام در تحقیقات رادیواکتیویته',
+    lifespan: '۱۸۶۷ - ۱۹۳۴'
+  },
+  {
+    name: 'اسحاق نیوتن',
+    description: 'ریاضیدان، فیزیکدان و منجم، واضع قوانین حرکت و گرانش',
+    lifespan: '۱۶۴۳ - ۱۷۲۷'
+  },
+  {
+    name: 'گالیلئو گالیله',
+    description: 'منجم، فیزیکدان و مهندس، از پایه‌گذاران علم مدرن',
+    lifespan: '۱۵۶۴ - ۱۶۴۲'
+  },
+  {
+    name: 'نیکولا تسلا',
+    description: 'مخترع، مهندس برق و آینده‌نگر، پیشگام در سیستم برق متناوب',
+    lifespan: '۱۸۵۶ - ۱۹۴۳'
+  },
+  {
+    name: 'لئوناردو داوینچی',
+    description: 'همه‌چیزدان دوره رنسانس، هنرمند، مخترع و دانشمند',
+    lifespan: '۱۴۵۲ - ۱۵۱۹'
+  },
+  {
+    name: 'الن تورینگ',
+    description: 'ریاضیدان و دانشمند کامپیوتر، پدر هوش مصنوعی نظری',
+    lifespan: '۱۹۱۲ - ۱۹۵۴'
+  },
+  {
+    name: 'روزالیند فرانکلین',
+    description: 'شیمیدان و بلورنگار، نقش حیاتی در کشف ساختار DNA',
+    lifespan: '۱۹۲۰ - ۱۹۵۸'
+  },
+  {
+    name: 'برایان کاکس',
+    description: 'فیزیکدان ذرات و مروج علم، معروف برای برنامه‌های تلویزیونی',
+    lifespan: 'متولد ۱۹۶۸'
+  },
+  {
+    name: 'ایلان ماسک',
+    description: 'کارآفرین و مهندس، بنیان‌گذار اسپیس‌ایکس و تسلا',
+    lifespan: 'متولد ۱۹۷۱'
+  },
+  {
+    name: 'نیل دگراس تایسون',
+    description: 'اخترشناس، نویسنده و مروج علم',
+    lifespan: 'متولد ۱۹۵۸'
+  },
+  {
+    name: 'جنیفر دودنا',
+    description: 'زیست‌شیمیدان، برنده جایزه نوبل برای توسعه CRISPR',
+    lifespan: 'متولد ۱۹۶۴'
   }
 ];

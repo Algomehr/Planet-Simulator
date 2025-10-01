@@ -1,7 +1,8 @@
 import React from 'react';
-import type { Planet, CustomPlanetParams, MainViewTab } from '../types';
+import type { Planet, CustomPlanetParams, MainViewTab, Scientist } from '../types';
 import PlanetSelector from './PlanetSelector';
 import PlanetCreator from './PlanetCreator';
+import ScientistSelector from './ScientistSelector';
 
 interface MainViewProps {
   activeTab: MainViewTab;
@@ -9,6 +10,7 @@ interface MainViewProps {
   onSelectPlanet: (planet: Planet) => void;
   onGenerate: (params: CustomPlanetParams) => void;
   onAnalyzeLife: (planet: Planet) => void;
+  onStartScientistChat: (scientist: Scientist) => void;
   onStartAstronautChat: () => void;
 }
 
@@ -23,7 +25,7 @@ const TabButton: React.FC<{ active: boolean; onClick: () => void; children: Reac
   );
 };
 
-const MainView: React.FC<MainViewProps> = ({ activeTab, onTabChange, onSelectPlanet, onGenerate, onAnalyzeLife, onStartAstronautChat }) => {
+const MainView: React.FC<MainViewProps> = ({ activeTab, onTabChange, onSelectPlanet, onGenerate, onAnalyzeLife, onStartScientistChat, onStartAstronautChat }) => {
   return (
     <div className="min-h-screen flex flex-col items-center p-4 sm:p-6 bg-gradient-to-b from-gray-900 to-indigo-900">
       <div className="text-center mb-10">
@@ -46,6 +48,9 @@ const MainView: React.FC<MainViewProps> = ({ activeTab, onTabChange, onSelectPla
             <TabButton active={activeTab === 'life'} onClick={() => onTabChange('life')}>
                 تحلیل حیات
             </TabButton>
+            <TabButton active={activeTab === 'scientists'} onClick={() => onTabChange('scientists')}>
+                دانشمندان
+            </TabButton>
             <TabButton active={activeTab === 'astronaut'} onClick={() => onTabChange('astronaut')}>
                 گفتگو با فضانورد
             </TabButton>
@@ -64,6 +69,14 @@ const MainView: React.FC<MainViewProps> = ({ activeTab, onTabChange, onSelectPla
                         سیاره‌ای را انتخاب کنید تا هوش مصنوعی پتانسیل وجود حیات و ویژگی‌های احتمالی آن را بر اساس داده‌های علمی تحلیل کند.
                     </p>
                     <PlanetSelector onSelectPlanet={onAnalyzeLife} />
+                </div>
+            )}
+            {activeTab === 'scientists' && (
+                 <div>
+                    <p className="text-center text-gray-400 mb-6 max-w-2xl mx-auto">
+                        یکی از بزرگترین اذهان تاریخ علم را برای یک گفتگوی جذاب انتخاب کنید.
+                    </p>
+                    <ScientistSelector onSelectScientist={onStartScientistChat} />
                 </div>
             )}
              {activeTab === 'astronaut' && (
