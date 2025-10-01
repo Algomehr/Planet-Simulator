@@ -13,13 +13,10 @@ const PlanetSelector: React.FC<PlanetSelectorProps> = ({ onSelectPlanet }) => {
         <div
           key={planet.nameEn}
           onClick={() => onSelectPlanet(planet)}
-          className="group bg-gray-800 bg-opacity-50 rounded-lg overflow-hidden shadow-lg border border-gray-700 hover:border-cyan-400 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer"
+          className="group bg-gray-800 bg-opacity-50 rounded-lg p-6 shadow-lg border border-gray-700 hover:border-cyan-400 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col h-full"
         >
-          <img src={planet.image} alt={planet.name} className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110" />
-          <div className="p-5">
-            <h2 className="text-2xl font-bold text-white mb-2">{planet.name}</h2>
-            <p className="text-gray-400 text-sm">{planet.description}</p>
-          </div>
+          <h2 className="text-2xl font-bold text-white mb-2">{planet.name}</h2>
+          <p className="text-gray-400 text-sm flex-grow">{planet.description}</p>
         </div>
       ))}
     </div>

@@ -1,7 +1,6 @@
 export interface Planet {
   name: string;
   nameEn: string;
-  image: string;
   description: string;
 }
 

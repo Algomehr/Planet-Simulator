@@ -42,7 +42,6 @@ const App: React.FC = () => {
       name: params.name,
       nameEn: params.name,
       description: params.description || 'سیاره‌ای که شما خلق کرده‌اید.',
-      image: `https://picsum.photos/seed/${params.name.replace(/\s+/g, '-')}/800/600`
     };
     setSelectedPlanet(customPlanet);
 
@@ -94,7 +93,6 @@ const App: React.FC = () => {
         name: "فضا",
         nameEn: "Space",
         description: "سفر میان ستاره‌ای",
-        image: ""
     };
     const astronautSimData: SimulationData = {
         cityName: "کهکشان راه شیری",
@@ -114,7 +112,6 @@ const App: React.FC = () => {
         name: "تاریخ علم",
         nameEn: "History of Science",
         description: "گفتگو با بزرگترین اذهان تاریخ",
-        image: ""
     };
     const scientistSimData: SimulationData = {
         cityName: "عرصه دانش",
